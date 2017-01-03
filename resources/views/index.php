@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scrolling Nav - Start Bootstrap Template</title>
+    <title>Warriors of Light</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
