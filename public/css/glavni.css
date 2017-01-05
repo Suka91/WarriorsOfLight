@@ -1,0 +1,23 @@
+.main-page{
+    display: none;
+}
+
+.login-section {
+     height: 100%;
+     padding-top: 10%;
+     text-align: center;
+     background: #fff;
+     display: none;
+ }
+
+.signup-section {
+    height: 100%;
+    padding-top: 10%;
+    text-align: center;
+    background: #fff;
+    display: none;
+}
+
+.login-elements{
+    padding-bottom: 10px;
+}
