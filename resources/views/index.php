@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>Warriors of Light</title>
+    <link rel="shortcut icon" href="../../public/images/light.png"/>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
@@ -52,6 +53,7 @@
                 <a class="navbar-brand logging-page" id="login_link" href="#">Login</a>
                 <a class="navbar-brand logging-page" id="singup_link" href="#">Sign Up</a>
                 <a class="navbar-brand page-scroll main-page" href="#about">Menu</a>
+                <span class="main-page" id="logged-user"></span>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -106,9 +108,26 @@
                 <div class="col-lg-12">
                     <h1>Menu</h1>
                     <p>Ovde ce ici meni za narucivanje. </p>
-                    <a class="btn btn-default page-scroll" href="#services">Leave the note.</a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <table id="menuTable">
+                        <tr>
+                            <th>Name</th>
+                            <th colspan="2">Telephone</th>
+                        </tr>
+                        <tr>
+                            <td>Bill Gates</td>
+                            <td>55577854</td>
+                            <td>55577855</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+                <a class="btn btn-default page-scroll" href="#services">Leave the note.</a>
         </div>
     </section>
 
@@ -142,7 +161,6 @@
             <div class="row">
                 <div class="col-lg-5"></div>
                 <div class="col-lg-2">
-                    <form id="login">
                         <div class="login-elements">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
@@ -159,7 +177,8 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="row">Login</button>
+                        <div class="row"></div>
+                        <a id="login_button" href="#">Login</a>
                     </form>
                 </div>
             </div>
@@ -173,16 +192,16 @@
             <div class="col-lg-2">
                     <div class="login-elements">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+                        <input id="register-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
                     </div>
 
                     <div class="login-elements">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                        <input id="register-password" type="password" class="form-control" name="password" placeholder="password">
                     </div>
                     <div class="login-elements">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="login-password" type="password" class="form-control" name="confirm_password" placeholder="confirm password">
+                        <input id="register-confirm-password" type="password" class="form-control" name="confirm_password" placeholder="confirm password">
                     </div>
                     <div class="row">
                         <div class="checkbox">
@@ -192,7 +211,7 @@
                         </div>
                     </div>
                     <div class="row"></div>
-                    <a id="login_button" href="#">Register</a>
+                    <a id="register_button" href="#">Register</a>
             </div>
         </div>
     </div>
@@ -219,6 +238,7 @@
     <script src="../../public/js/jquery.easing.min.js"></script>
     <script src="../../public/js/scrolling-nav.js"></script>
     <script src="../../public/js/visualization_handiling.js"></script>
+    <script src="../../public/js/wol_java_script.js"></script>
 
 </body>
 

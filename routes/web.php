@@ -11,12 +11,16 @@
 |
 */
 
+use App\Models\Menu;
+
 $app->get('/', function () use ($app) {
     return $app->version();
 });
 $app->get('/test', function () {
     return 'Hello World';
 });
-$app->post('/test', function () {
-    //
-});
+
+$app->post('/Register',     'AuthController@register');
+$app->post('/Login',         'AuthController@login');
+
+$app->get('/MenuList', 'MenuController@getAll');

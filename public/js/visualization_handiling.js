@@ -10,8 +10,4 @@ $(document).ready(function() {
         $(".login-section").css('display',"");
         $(".signup-section").css('display',"block");
     });
-    $("#login_button").click(function () {
-        $(".logging-page").css('display', "none");
-        $(".main-page").css('display', "block");
-    })
 });

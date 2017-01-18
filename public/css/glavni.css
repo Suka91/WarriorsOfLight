@@ -1,7 +1,9 @@
 .main-page{
     display: none;
 }
-
+.logging-page{
+    display: block;
+}
 .login-section {
      height: 100%;
      padding-top: 10%;
