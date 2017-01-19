@@ -113,17 +113,8 @@
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <table id="menuTable">
-                        <tr>
-                            <th>Name</th>
-                            <th colspan="2">Telephone</th>
-                        </tr>
-                        <tr>
-                            <td>Bill Gates</td>
-                            <td>55577854</td>
-                            <td>55577855</td>
-                        </tr>
-                    </table>
+                    <div id="menu-table">
+                    </div>
                 </div>
                 <div class="col-md-4"></div>
             </div>
@@ -138,6 +129,13 @@
                 <div class="col-lg-12">
                     <h1>Note</h1>
                     <p>Ovde ce ici tekst area gde moze da se napise napomena. </p>
+                    <textarea id="note" rows="10" cols="80">
+                    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+                    </textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     <a class="btn btn-default page-scroll" href="#contact">Scan code on table.</a>
                 </div>
             </div>
@@ -151,6 +149,11 @@
                 <div class="col-lg-12">
                     <h1>Scan</h1>
                     <p>Ovde cemo roknuti kameru za skeniranje, posle cega automatski se salje porudzbina ili cemo da stavimo dugme.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a class="btn btn-default" id="confirm_order_button" href="#">Confirm order</a>
                 </div>
             </div>
         </div>
@@ -178,7 +181,7 @@
                             </div>
                         </div>
                         <div class="row"></div>
-                        <a id="login_button" href="#">Login</a>
+                        <a class="btn btn-default" id="login_button" href="#">Login</a>
                     </form>
                 </div>
             </div>
@@ -211,7 +214,7 @@
                         </div>
                     </div>
                     <div class="row"></div>
-                    <a id="register_button" href="#">Register</a>
+                    <a class="btn btn-default" id="register_button" href="#">Register</a>
             </div>
         </div>
     </div>

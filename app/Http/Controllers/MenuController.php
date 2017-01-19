@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 class MenuController extends Controller
 {
     public function getAll(Request $request) {
+        $this->validate($request, [
+            'user_name'=> 'required'
+        ]);
+
         $user = Users::query()->where('user_name',$request->input('user_name'))->get(['user_timestamp']);
 
         $user_timestamp = $user[0]->user_timestamp;

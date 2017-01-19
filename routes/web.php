@@ -22,5 +22,6 @@ $app->get('/test', function () {
 
 $app->post('/Register',     'AuthController@register');
 $app->post('/Login',         'AuthController@login');
+$app->post('/ConfirmOrder', 'OrderListController@confirm');
 
 $app->get('/MenuList', 'MenuController@getAll');

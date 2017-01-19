@@ -21,13 +21,13 @@ class AuthController extends Controller
             'user_password' => 'required',
         ]);
 
-        return view('index');
-        /*$user = new Users;
+        $user = new Users;
 
         $user->user_name =  $request->input('user_name');
         $user->user_password =  $request->input('user_password');
         $user->user_employed =  false;
-        $user->save();*/
+        $user->save();
+        return view('index');
     }
     public function login(Request $request)
     {
@@ -49,15 +49,11 @@ class AuthController extends Controller
             return response()->json(['data'=>$user->get()]);
         }
         else {
+            //TODO
             $user = "Suka";
+            $user = $user->get();
+
+            return response()->json(['data'=>$user]);
         }
-//        $check_user = $user->where('user_name',$request->input('user_name'))->where('user_password',$request->input('user_password'));
-//        $user = Users::select("select * from users where user_name=".$request->input('user_name')." and user_password=".$request->input('user_password'));
-        //$user = DB::table('users')->where('user_name', $request->input('user_name'))->first();
-        //$user = array("Ljubica","Suka");
-
-        $user = $user->get();
-
-        return response()->json(['data'=>$user]);
     }
 }
