@@ -2,6 +2,7 @@
  * Created by sukab on 1/17/2017.
  */
 $(document).ready(function(){
+
     $("#register_button").click(function(){
         console.log("register_button");
         console.log($("#register-username").val());
@@ -11,9 +12,13 @@ $(document).ready(function(){
                     method: 'POST',
                     data: { user_name: $("#register-username").val(), user_password: $("#register-password").val() },
                     success: function (result, textStatus, xhr){
-                        $(".signup-section").css('display',"");
-                        $(".login-section").css('display',"block");
-                        console.log("USPESNO");
+                        if(result.status){
+                            $(".signup-section").css('display',"");
+                            $(".login-section").css('display',"block");
+                            console.log("USPESNO");
+                        }else{
+                            alert(result.message);
+                        }
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log("NEUSPESNO");
@@ -29,14 +34,16 @@ $(document).ready(function(){
             method: 'POST',
             data: { user_name: $("#login-username").val(), user_password: $("#login-password").val() },
             success: function (result, textStatus, xhr){
-                console.log(result.data[0].user_name);
-                console.log("USPESNO");
-                console.log(result.data);
-                document.getElementById("logged-user").innerHTML = result.data[0].user_name;
-                //$("#logged-user").innerHTML = result.data[0].user_name;
-                $(".logging-page").css('display', "none");
-                $(".main-page").css('display', "block");
-                fillMenuList();
+                if(result.status) {
+                    document.getElementById("logged-user").innerHTML = result.data;
+                    //$("#logged-user").innerHTML = result.data[0].user_name;
+                    $(".logging-page").css('display', "none");
+                    $(".main-page").css('display', "block");
+                    $('#singout_link').show();
+                    fillMenuList();
+                }else{
+                    alert(result.message);
+                }
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("NEUSPESNO");
@@ -74,6 +81,7 @@ $(document).ready(function(){
         content+="</table>";
         document.getElementById("menu-table").innerHTML = content;
     }
+
     function makeMenuTableByType(data, type) {
         var content = "";
         for(var i=0; i< data.length;i++){
@@ -104,12 +112,14 @@ $(document).ready(function(){
             }
         }
         json+="]";
+        console.log(json);
         $.ajax({
             url: '/WarriorsOfLight/public/ConfirmOrder',
             method: 'POST',
             data: { json_string: json, note: $("#note").val()},
             success: function (result, textStatus, xhr){
-                console.log(result.data[0]);
+                buildFinishedOrder(result.data);
+                console.log(result.data);
                 console.log("USPESNO");
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -117,14 +127,47 @@ $(document).ready(function(){
             }
         });
     });
+    function buildFinishedOrder(order_id){
+        $.ajax({
+            url: '/WarriorsOfLight/public/OrderList',
+            method: 'GET',
+            data: { orderId: order_id },
+            success: function (result, textStatus, xhr){
+                console.log(result);
+                content ="<table style='width: 410px;height: 610px;margin: 120px 0 0 0;'><tr><th>Ime proizvoda</th><th>Kolicina</th></tr>";
+                for(var i=0; i< result.data.orderList.length;i++){
+                        content +="<tr><td>"+ result.data.orderList[i].product_name+"</td>"+
+                            "<td>"+result.data.orderList[i].product_amount +
+                            "</td></tr>";
+                }
+                content +="</table> Ukupno" + result.data.orderinfo.order_list_cost;
+
+                $('section.main-page').hide();
+                $('#order').show().attr('result-id',order_id).find('#menu-table-order').html(content);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("NEUSPESNO");
+            }
+        });
+
+    }
 
     function fillJSON(table,rw_number){
         var json = "";
         for(var i=0;i< rw_number;i++)
         {
             var oCells = table.rows.item(i).cells;
-            json+='{"product_id":'+ oCells[3].firstChild.id +',"product_quantity":'+
-                  document.getElementById(oCells[3].firstChild.id).value+"}";
+            json+='{"product_id":'+ oCells[3].firstChild.id +',"product_quantity":';
+            if(!document.getElementById(oCells[3].firstChild.id).value)
+            {
+                json +="0 ,";
+            }
+            else {
+                json+= document.getElementById(oCells[3].firstChild.id).value + " ,";
+            }
+            json +='"product_cost":'+oCells[2].innerHTML.substring(oCells[2].innerHTML.indexOf('/')+1);
+            json +=" }";
+
             if(i<rw_number-1)
             {
                 json+=',';
@@ -132,7 +175,7 @@ $(document).ready(function(){
 
         }
         //json = json.slice(0,json.length-1);
-        console.log(json);
+        //console.log(json);
         return json;
     }
 });

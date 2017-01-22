@@ -24,4 +24,6 @@ $app->post('/Register',     'AuthController@register');
 $app->post('/Login',         'AuthController@login');
 $app->post('/ConfirmOrder', 'OrderListController@confirm');
 
+$app->get('/Logout',         'AuthController@logout');
+$app->get('/OrderList', 'OrderListController@getAll');
 $app->get('/MenuList', 'MenuController@getAll');
