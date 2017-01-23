@@ -11,7 +11,14 @@
      background: #fff;
      display: none;
  }
-
+.videoDiv{
+    width: 300px;
+    height: 300px;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0px;
+}
 .signup-section {
     height: 100%;
     padding-top: 10%;
@@ -23,3 +30,9 @@
 .login-elements{
     padding-bottom: 10px;
 }
+#qr-canvas{
+    display : none;
+}
+/*#confirm_order_button{
+    visibility : hidden;
+}*/

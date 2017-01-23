@@ -32,6 +32,27 @@
 
    -->
 
+    <script type="text/javascript" src="../../public/js/grid.js"></script>
+    <script type="text/javascript" src="../../public/js/version.js"></script>
+    <script type="text/javascript" src="../../public/js/detector.js"></script>
+    <script type="text/javascript" src="../../public/js/formatinf.js"></script>
+    <script type="text/javascript" src="../../public/js/errorlevel.js"></script>
+    <script type="text/javascript" src="../../public/js/bitmat.js"></script>
+    <script type="text/javascript" src="../../public/js/datablock.js"></script>
+    <script type="text/javascript" src="../../public/js/bmparser.js"></script>
+    <script type="text/javascript" src="../../public/js/datamask.js"></script>
+    <script type="text/javascript" src="../../public/js/rsdecoder.js"></script>
+    <script type="text/javascript" src="../../public/js/gf256poly.js"></script>
+    <script type="text/javascript" src="../../public/js/gf256.js"></script>
+    <script type="text/javascript" src="../../public/js/decoder.js"></script>
+    <script type="text/javascript" src="../../public/js/qrcode.js"></script>
+    <script type="text/javascript" src="../../public/js/findpat.js"></script>
+    <script type="text/javascript" src="../../public/js/alignpat.js"></script>
+    <script type="text/javascript" src="../../public/js/databr.js"></script>
+
+    <script type="text/javascript">
+
+    </script>
 </head>
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
@@ -161,6 +182,19 @@
                     <p>Ovde cemo roknuti kameru za skeniranje, posle cega automatski se salje porudzbina ili cemo da stavimo dugme.</p>
                 </div>
             </div>
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
+                    <video autoplay class="videoDiv"></video>
+                    <canvas id="qr-canvas" width="300" height="300"></canvas>
+
+                    <!-- <button onclick="snapshot()">Capture</button><br> -->
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-lg-12">
                     <a class="btn btn-default" id="confirm_order_button" href="#">Confirm order</a>
@@ -252,6 +286,8 @@
     <script src="../../public/js/scrolling-nav.js"></script>
     <script src="../../public/js/visualization_handiling.js"></script>
     <script src="../../public/js/wol_java_script.js"></script>
+
+
 
 </body>
 

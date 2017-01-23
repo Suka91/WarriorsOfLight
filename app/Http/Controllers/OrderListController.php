@@ -30,6 +30,7 @@ class OrderListController extends Controller
         $order_list->user_id =$current_user['user_id'] ;
         $cost =  $this->calculate_cost($menu_table_content);
         $order_list->order_list_cost = $cost;
+        $order_list->order_list_table_id = $request->input('table_id');
         //$order_list->order_list_cost = 0.0;
         //$this->calculate_cost($menu_table_content);
        if($order_list->save() && $this->insert_into_order($menu_table_content,$order_list['id'])) {
