@@ -25,3 +25,6 @@ $app->post('/Login',         'AuthController@login');
 $app->post('/ConfirmOrder', 'OrderListController@confirm');
 
 $app->get('/MenuList', 'MenuController@getAll');
+
+$app->get('/OrderList', 'AdminController@getAll');
+$app->get('/LoadInterval', 'AdminController@interval');

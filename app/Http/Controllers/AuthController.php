@@ -46,6 +46,7 @@ class AuthController extends Controller
             //->update(['delayed' => 1]);
             $user->update(['user_token' => $user_token]);
             $user->update(['user_timestamp' => $user_timestamp]);
+
             return response()->json(['data'=>$user->get()]);
         }
         else {
