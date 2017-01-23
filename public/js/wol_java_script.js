@@ -179,8 +179,9 @@ $(document).ready(function(){
                     data: { user_name: $("#register-username").val(), user_password: $("#register-password").val() },
                     success: function (result, textStatus, xhr){
                         if(result.status){
-                            $(".signup-section").css('display',"");
-                            $(".login-section").css('display',"block");
+                            $(".signup-section").css('display',"none");
+                            $(".main-page").css('display', "block");
+                            $(".intro-section").css('padding-top', "150px");
                             console.log("USPESNO");
                         }else{
                             alert(result.message);
@@ -205,6 +206,7 @@ $(document).ready(function(){
                     //$("#logged-user").innerHTML = result.data[0].user_name;
                     $(".logging-page").css('display', "none");
                     $(".main-page").css('display', "block");
+                    $(".intro-section").css('padding-top', "150px");
                     $('#singout_link').show();
                     fillMenuList();
                 }else{
@@ -233,19 +235,21 @@ $(document).ready(function(){
         });
     }
     function makeMenuTable(result){
-        var content= "<h>Coffee and Tea</h>";
-        content+="<table id='cofee-and-tea-table'>"
-        content+= makeMenuTableByType(result.data, "coffee_and_tea");
-        content+="</table>";
-        content+= "<h>Soft drinks</h>";
-        content+="<table id='soft-drinks-table'>";
-        content+= makeMenuTableByType(result.data, "soft_drinks");
-        content+="</table>";
-        content += "<h>Wines and Beers</h>";
-        content+="<table id='wines-and-beers-table'>";
-        content+= makeMenuTableByType(result.data, "wines_and_beers");
-        content+="</table>";
-        document.getElementById("menu-table").innerHTML = content;
+        var content1= "<h id='h_table'>Coffee and Tea</h>";
+        content1+="<table id='coffee-and-tea-table'>"
+        content1+= makeMenuTableByType(result.data, "coffee_and_tea");
+        content1+="</table>";
+        var content2= "<h id='h_table'>Soft drinks</h>";
+        content2+="<table id='soft-drinks-table'>";
+        content2+= makeMenuTableByType(result.data, "soft_drinks");
+        content2+="</table>";
+        var content3 = "<h id='h_table'>Wines and Beers</h>";
+        content3+="<table id='wines-and-beers-table'>";
+        content3+= makeMenuTableByType(result.data, "wines_and_beers");
+        content3+="</table>";
+        document.getElementById("coffee_and_tea").innerHTML = content1;
+        document.getElementById("soft_drinks").innerHTML = content2;
+        document.getElementById("wines_and_beers").innerHTML = content3;
     }
 
     function makeMenuTableByType(data, type) {
@@ -253,12 +257,23 @@ $(document).ready(function(){
         for(var i=0; i< data.length;i++){
             console.log(data[i].product_type);
             console.log(type);
-            if(data[i].product_type === type)
+            if((data[i].product_type === type) && (type === "coffee_and_tea"))
             {
-                content +="<tr><td>"+ data[i].product_name+"</td>"+
-                               "<td>"+data[i].product_description +
-                    "</td><td>"+data[i].product_quantity+"/"+data[i].product_cost+"</td>" +
-                    "</td><td><input type='number' id='"+data[i].product_id+"' min='0' value=''></tr>";
+                content +="<tr><td id='name_td'>"+ data[i].product_name+"</td>"+
+                    "<td id='cost_td'>"+"  " +data[i].product_cost+"</td>" +
+                    "<td class='td_input'><input type='number' class='input_tr' id='"+data[i].product_id+"' min='0' value=''></tr>";
+            }
+            else if((data[i].product_type === type) && (type === "soft_drinks"))
+                {
+                content +="<tr><td id='name_td'>"+ data[i].product_name+"</td>"+
+                    "<td id='cost_td'>"+"  " +data[i].product_cost+"    "+ "</td>" +
+                    "<td class='td_input'><input type='number' class='input_tr id='"+data[i].product_id+"' min='0' value=''></tr>";
+            }
+            else if((data[i].product_type === type) && (type === "wines_and_beers"))
+            {
+                content +="<tr><td id='name_td'>"+ data[i].product_name+"</td>"+
+                    "<td id='cost_td'>"+data[i].product_quantity+"/"+data[i].product_cost+"</td>" +
+                    "<td class='td_input'><input type='number' class='input_tr id='"+data[i].product_id+"' min='0' value='' width='10%'></tr>";
             }
         }
         return content;

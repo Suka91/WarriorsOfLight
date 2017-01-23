@@ -117,6 +117,10 @@
     </div>
 </section>
 
+<section class="image_link intro-section">
+</section>
+
+
     <!-- Intro Section -->
     <section id="intro" class="intro-section main-page">
         <div class="container">
@@ -137,17 +141,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Menu</h1>
-                    <p>Ovde ce ici meni za narucivanje. </p>
+                    <h1 id="menu_h1">Menu</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div id="menu-table">
-                    </div>
-                </div>
-                <div class="col-md-4"></div>
+                <div class="col-md-4" id="coffee_and_tea"></div>
+                <div class="col-md-4" id="soft_drinks"></div>
+                <div class="col-md-4" id="wines_and_beers"></div>
             </div>
                 <a class="btn btn-default page-scroll" href="#services">Leave the note.</a>
         </div>
