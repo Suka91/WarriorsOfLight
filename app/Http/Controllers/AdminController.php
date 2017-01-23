@@ -25,8 +25,8 @@ class AdminController extends Controller
             ->join('order', 'order_list.order_list_id', '=', 'order.order_list_id')
             ->join('menu', 'order.product_id', '=', 'menu.product_id')
             ->select('menu.product_name','order.order_id',
-                'order.product_amount', 'order_list.order_list_note',
-                'order_list.order_list_asked_bill', 'order_list.order_list_is_settled')
+                'order.product_amount', 'order_list.order_list_note', 'order_list.order_list_id',
+                'order_list.order_list_asked_bill', 'order_list.order_list_is_settled', 'order_list.order_list_table_id')
             ->get();
         return response()->json(['data'=>$order]);
     }

@@ -35,6 +35,7 @@ qrcode.decode = function(src){
         var context = canvas_qr.getContext('2d');
         qrcode.width = canvas_qr.width;
         qrcode.height = canvas_qr.height;
+        console.log(qrcode.width, qrcode.height);
         qrcode.imagedata = context.getImageData(0, 0, qrcode.width, qrcode.height);
         qrcode.result = qrcode.process(context);
         console.log(qrcode.result);

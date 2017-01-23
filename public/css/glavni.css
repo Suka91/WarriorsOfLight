@@ -51,11 +51,11 @@
 .intro-section {
     padding-top: 0px;
 }
-#name_td{
+.name_td{
     margin-right: 10px;
 }
 
-#cost_td{
+.cost_td{
     padding-left: 15px;
     width: 20px;
 }
@@ -85,6 +85,34 @@
     font-size: 20px;
 }
 
-/*#confirm_order_button{
+#div_btn{
+    padding-top: 20px;
+    padding-left: 150px;
+}
+
+#tabela_ordera{
+    align-self: center;
+    position: relative;
+    width: 200px;
+    height: 80px;
+    border-collapse: collapse;
+    margin-top: 200px;
+    margin-left: 45%;
+}
+
+#order_list_h{
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#orders {
+    padding-left: 250px;
+}
+
+
+
+#confirm_order_button{
     visibility : hidden;
-}*/
+}

@@ -23,10 +23,14 @@ $app->get('/test', function () {
 $app->post('/Register',     'AuthController@register');
 $app->post('/Login',         'AuthController@login');
 $app->post('/ConfirmOrder', 'OrderListController@confirm');
+$app->post('/AskBill', 'OrderListController@askBill');
 
 $app->get('/Logout',         'AuthController@logout');
-$app->get('/OrderList', 'OrderListController@getAll');
-$app->get('/MenuList', 'MenuController@getAll');
+$app->get('/OrderList',     'OrderListController@getAll');
+$app->get('/MenuList',       'MenuController@getAll');
 
-+$app->get('/OrderList', 'AdminController@getAll');
-+$app->get('/LoadInterval', 'AdminController@interval');
+$app->get('/OrderListAdmin', 'AdminController@getAll');
+$app->get('/LoadInterval', 'AdminController@interval');
+
+
+

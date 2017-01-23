@@ -30,7 +30,7 @@ class MenuController extends Controller
 
         $secs = $user_timestamp - $current_timestamp;
 
-        if($secs/60.0 < 30){
+        if($secs/60.0 < 30) {
             $menu = Menu::all();
             return response()->json(['status'=>true,'message'=>'menu results','data'=>$menu]);
         }

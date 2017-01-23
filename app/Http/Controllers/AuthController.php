@@ -54,7 +54,7 @@ class AuthController extends Controller
             //->update(['delayed' => 1]);
             $user->update(['user_token' => $user_token]);
             $user->update(['user_timestamp' => $user_timestamp]);
-            return response()->json(['status'=>true,'message'=>'user loged','data'=>$userIddb['user_name']]);
+            return response()->json(['status'=>true,'message'=>'user loged','data'=>$userIddb['user_name'],'user_consump'=>$userIddb['user_consumption']]);
         }
         else {
             return response()->json(['status'=>false,'message'=>'user not loged']);
@@ -63,7 +63,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         session_unset();
-        header("Location: http://example.com/myOtherPage.php");
-        die();
+//        header("Location: http://example.com/myOtherPage.php");
+//        die();
     }
 }

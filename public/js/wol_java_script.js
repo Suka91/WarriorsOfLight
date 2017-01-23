@@ -146,7 +146,7 @@ $(document).ready(function(){
             // Ready to go. Do some stuff.
         };
     }, errorCallback);
-
+    var user_consump = 0.0;
     var isScanned = false;
     setInterval(intervalFunction, 300);
     function intervalFunction()
@@ -203,6 +203,8 @@ $(document).ready(function(){
             success: function (result, textStatus, xhr){
                 if(result.status) {
                     document.getElementById("logged-user").innerHTML = result.data;
+                    user_consump = result.user_consump;
+                    document.getElementById("popust_id_p").innerHTML = " " +result.user_consump +" %";
                     //$("#logged-user").innerHTML = result.data[0].user_name;
                     $(".logging-page").css('display', "none");
                     $(".main-page").css('display', "block");
@@ -212,6 +214,20 @@ $(document).ready(function(){
                 }else{
                     alert(result.message);
                 }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("NEUSPESNO");
+            }
+        });
+    });
+    $("#singout_link").click(function () {
+        $.ajax({
+            url: '/WarriorsOfLight/public/Logout',
+            method: 'GET',
+            success: function (result, textStatus, xhr){
+                $(".logging-page").css('display', "block");
+                $(".main-page").css('display', "none");
+                $('#singout_link').hide();
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("NEUSPESNO");
@@ -259,33 +275,36 @@ $(document).ready(function(){
             console.log(type);
             if((data[i].product_type === type) && (type === "coffee_and_tea"))
             {
-                content +="<tr><td id='name_td'>"+ data[i].product_name+"</td>"+
-                    "<td id='cost_td'>"+"  " +data[i].product_cost+"</td>" +
+                content +="<tr><td class='name_td'>"+ data[i].product_name+"</td>"+
+                    "<td class='cost_td'>"+"  " +data[i].product_cost+"</td>" +
                     "<td class='td_input'><input type='number' class='input_tr' id='"+data[i].product_id+"' min='0' value=''></tr>";
             }
             else if((data[i].product_type === type) && (type === "soft_drinks"))
                 {
-                content +="<tr><td id='name_td'>"+ data[i].product_name+"</td>"+
-                    "<td id='cost_td'>"+"  " +data[i].product_cost+"    "+ "</td>" +
-                    "<td class='td_input'><input type='number' class='input_tr id='"+data[i].product_id+"' min='0' value=''></tr>";
+                content +="<tr><td class='name_td'>"+ data[i].product_name+"</td>"+
+                    "<td class='cost_td'>"+"  " +data[i].product_cost+"    "+ "</td>" +
+                    "<td class='td_input'><input type='number' class='input_tr' id='"+data[i].product_id+"' min='0' value=''></tr>";
             }
             else if((data[i].product_type === type) && (type === "wines_and_beers"))
             {
-                content +="<tr><td id='name_td'>"+ data[i].product_name+"</td>"+
-                    "<td id='cost_td'>"+data[i].product_quantity+"/"+data[i].product_cost+"</td>" +
-                    "<td class='td_input'><input type='number' class='input_tr id='"+data[i].product_id+"' min='0' value='' width='10%'></tr>";
+                content +="<tr><td class='name_td'>"+ data[i].product_name+"</td>"+
+                    "<td class='cost_td'>"+data[i].product_quantity+"/"+data[i].product_cost+"</td>" +
+                    "<td class='td_input'><input type='number' class='input_tr' id='"+data[i].product_id+"' min='0' value='' width='10%'></tr>";
             }
         }
         return content;
     }
     $("#confirm_order_button").click(function(){
-        console.log("confirm_order_button");
+        console.log("confirm_order_button")
+        console.log(user_consump);
         var json = "[";
-        var tables = [document.getElementById("cofee-and-tea-table"),
+        var tables = [document.getElementById("coffee-and-tea-table"),
          document.getElementById("soft-drinks-table"),
          document.getElementById("wines-and-beers-table")];
         var number_rows_in_tables = [tables[0].rows.length,tables[1].rows.length,tables[2].rows.length];
-        for(var i = 0; i < tables.length;i++) {
+        for(var i = 0; i < tables.length; i++) {
+            console.log(tables[i]);
+            console.log(number_rows_in_tables[i]);
             json += fillJSON(tables[i], number_rows_in_tables[i]);
             if(i<tables.length-1)
             {
@@ -297,10 +316,10 @@ $(document).ready(function(){
         $.ajax({
             url: '/WarriorsOfLight/public/ConfirmOrder',
             method: 'POST',
-            data: { json_string: json, note: $("#note").val(), table_id:  1/*localStorage.getItem("table_id")*/},
+            data: { json_string: json, note: $("#note").val(), table_id: localStorage.getItem("table_id"), popust: user_consump},
             success: function (result, textStatus, xhr){
-                buildFinishedOrder(result.data);
                 console.log(result.data);
+                buildFinishedOrder(result.data);
                 console.log("USPESNO");
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -309,21 +328,24 @@ $(document).ready(function(){
         });
     });
     function buildFinishedOrder(order_id){
+        localStorage.setItem('order_list_id',order_id);
         $.ajax({
             url: '/WarriorsOfLight/public/OrderList',
             method: 'GET',
             data: { orderId: order_id },
             success: function (result, textStatus, xhr){
                 console.log(result);
-                content ="<table style='width: 410px;height: 610px;margin: 120px 0 0 0;'><tr><th>Ime proizvoda</th><th>Kolicina</th></tr>";
+                content ="<table id='tabela_ordera'><tr><th>Ime proizvoda</th><th>Kolicina</th></tr>";
                 for(var i=0; i< result.data.orderList.length;i++){
-                        content +="<tr><td>"+ result.data.orderList[i].product_name+"</td>"+
-                            "<td>"+result.data.orderList[i].product_amount +
+                        content +="<tr><td class='td_order'>"+ result.data.orderList[i].product_name+"</td>"+
+                            "<td class='td_order'>"+result.data.orderList[i].product_amount +
                             "</td></tr>";
                 }
-                content +="</table> Ukupno" + result.data.orderinfo.order_list_cost;
+                content +="<tr><td>Ukupno sa popustom</td> <td>"+result.data.orderinfo.order_list_cost+"</td>"+ "</table>";
 
                 $('section.main-page').hide();
+                $('#ww').hide()
+                $('#menu').hide();
                 $('#order').show().attr('result-id',order_id).find('#menu-table-order').html(content);
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -333,30 +355,63 @@ $(document).ready(function(){
 
     }
 
+    $('#btn_trazi_racun').click(function () {
+        console.log("TRAZI RACUN");
+        console.log(localStorage.getItem("order_list_id"));
+        $.ajax({
+            url: '/WarriorsOfLight/public/AskBill',
+            method: 'POST',
+            data: { order_list_id: localStorage.getItem("order_list_id")},
+            success: function (result, textStatus, xhr){
+                $('#order').hide().find('#menu-table-order').html("");
+                $(".logging-page").css('display', "none");
+                $(".main-page").css('display', "block");
+                $(".intro-section").css('padding-top', "150px");
+                $('#singout_link').show();
+                fillMenuList();
+                isScanned = false;
+                $("#confirm_order_button").css('visibility', 'hidden');
+                console.log("USPESNO");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("NEUSPESNO");
+            }
+        });
+    });
+
+
+
+
     function fillJSON(table,rw_number){
         var json = "";
-        for(var i=0;i< rw_number;i++)
-        {
+        for(var i=0;i< rw_number;i++) {
             var oCells = table.rows.item(i).cells;
-            json+='{"product_id":'+ oCells[3].firstChild.id +',"product_quantity":';
-            if(!document.getElementById(oCells[3].firstChild.id).value)
-            {
-                json +="0 ,";
-            }
-            else {
-                json+= document.getElementById(oCells[3].firstChild.id).value + " ,";
-            }
-            json +='"product_cost":'+oCells[2].innerHTML.substring(oCells[2].innerHTML.indexOf('/')+1);
-            json +=" }";
+            console.log(oCells[2].firstChild.id);
+            if (oCells.length == 3) {
+                json += '{"product_id":' + oCells[2].firstChild.id + ',"product_quantity":';
+                if (!document.getElementById(oCells[2].firstChild.id).value) {
+                    json += "0 ,";
+                }
+                else {
+                    json += document.getElementById(oCells[2].firstChild.id).value + " ,";
+                }
+                if(oCells[2].firstChild.id >= 15)
+                {
+                    json += '"product_cost":' + oCells[1].innerHTML.substring(oCells[1].innerHTML.indexOf('/') + 1);
+                    json += " }";
+                }
+                else {
+                    json += '"product_cost":' + oCells[1].innerHTML.trim();
+                    json += " }";
+                }
 
-            if(i<rw_number-1)
-            {
-                json+=',';
+                if (i < rw_number - 1) {
+                    json += ',';
+                }
             }
-
         }
         //json = json.slice(0,json.length-1);
-        //console.log(json);
+        console.log(json);
         return json;
     }
 });

@@ -70,11 +70,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll main-page" href="#intro">Welcome warrior</a>
+                <a class= "navbar-brand page-scroll main-page" id ="ww" href="#intro">Welcome warrior</a>
                 <a class="navbar-brand logging-page" id="login_link" href="#">Login</a>
                 <a class="navbar-brand logging-page" id="singup_link" href="#">Sign Up</a>
                 <a class="navbar-brand" id="singout_link" href="/WarriorsOfLight/public/Logout" style="display:none;">Sign Out</a>
-                <a class="navbar-brand page-scroll main-page" href="#about">Menu</a>
+                <a class="navbar-brand page-scroll main-page" id="menu" href="#about">Menu</a>
                 <span class="main-page" id="logged-user"></span>
             </div>
 
@@ -110,10 +110,15 @@
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <div id="menu-table-order">
+            <div class="col-md-4" id="menu-table-order">
             </div>
         </div>
         <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" id="div_btn"><a class="btn btn-default" id="btn_trazi_racun">Traži račun</a> </div>
+
     </div>
 </section>
 
@@ -127,9 +132,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Welcome warrior</h1>
-                    <p>Ovde ce ici neki uvod (to kako kafic promovise green pricu itd..) </p>
-                    <p>Ovde ce da pise koliko je potrosnja struje </p>
-                    <p>Ovde ce ici koliki je popust </p>
+                    <h2>Dobrodošli u kafić Svetlost</h2>
+                    <p>Ovo je prvi kafić koji vam nudi popust u odnosu na potrošnju struje u vašem domu.
+                    Sačuvajmo našu planetu Zemlju i uživajte u svakom danu</p>
+                    <p >Vaš popust na svaki račun ce biti <span id="popust_id_p"></span>  </p>
                     <a class="btn btn-default page-scroll" href="#about">Proceed to menu.</a>
                 </div>
             </div>
@@ -158,10 +164,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Note</h1>
-                    <p>Ovde ce ici tekst area gde moze da se napise napomena. </p>
+                    <h1>Napomena</h1>
                     <textarea id="note" rows="10" cols="80">
-                    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+                    Vaša napomena
                     </textarea>
                 </div>
             </div>
@@ -179,7 +184,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Scan</h1>
-                    <p>Ovde cemo roknuti kameru za skeniranje, posle cega automatski se salje porudzbina ili cemo da stavimo dugme.</p>
+                    <p>Skenirajte bar kod na vašem stolu</p>
                 </div>
             </div>
 

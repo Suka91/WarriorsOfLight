@@ -29,7 +29,7 @@ class OrderListController extends Controller
         $order_list->order_list_note = $request->input('note');
         $order_list->user_id =$current_user['user_id'] ;
         $cost =  $this->calculate_cost($menu_table_content);
-        $order_list->order_list_cost = $cost;
+        $order_list->order_list_cost = $cost-($cost*$request->input('popust')/100.0);
         $order_list->order_list_table_id = $request->input('table_id');
         //$order_list->order_list_cost = 0.0;
         //$this->calculate_cost($menu_table_content);
@@ -40,6 +40,12 @@ class OrderListController extends Controller
        }
 
 
+    }
+    public function AskBill(Request $request){
+        /*var_dump($request);
+        die;*/
+        $order_list = Order_List::query()->where('order_list_id',$request->input('order_list_id'));
+        $order_list->update(['order_list_asked_bill' => true]);
     }
     public function getAll(Request $request) {
         $this->validate($request, [
