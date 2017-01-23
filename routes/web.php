@@ -28,3 +28,5 @@ $app->get('/MenuList', 'MenuController@getAll');
 
 $app->get('/OrderList', 'AdminController@getAll');
 $app->get('/LoadInterval', 'AdminController@interval');
+
+$app->get('/Logout',         'AuthController@logout');

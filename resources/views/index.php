@@ -52,6 +52,7 @@
                 <a class="navbar-brand page-scroll main-page" href="#intro">Welcome warrior</a>
                 <a class="navbar-brand logging-page" id="login_link" href="#">Login</a>
                 <a class="navbar-brand logging-page" id="singup_link" href="#">Sign Up</a>
+                <a class="navbar-brand" id="singout_link" href="/WarriorsOfLight/public/Logout" style="display:none;">Sign Out</a>
                 <a class="navbar-brand page-scroll main-page" href="#about">Menu</a>
                 <span class="main-page" id="logged-user"></span>
             </div>
@@ -87,6 +88,17 @@
 
     <section class="image_link intro-section">
     </section>
+
+<section id="order" class="order-section main-page" style="display:none;">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div id="menu-table-order">
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</section>
 
     <!-- Intro Section -->
     <section id="intro" class="intro-section main-page">

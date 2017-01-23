@@ -15,4 +15,5 @@ class Order extends Model
 {
     protected $table='Order';
     public $timestamps=false;
+
 }

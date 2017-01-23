@@ -20,7 +20,10 @@ class MenuController extends Controller
             'user_name'=> 'required'
         ]);
 
-        $user = Users::query()->where('user_name',$request->input('user_name'))->get(['user_timestamp']);
+        if(empty($_SESSION['user_id'])){
+            return response()->json(['status'=>false,'message'=>'user not loged']);
+        }
+        $user = Users::query()->where('user_id',$_SESSION['user_id'])->get(['user_timestamp']);
 
         $user_timestamp = $user[0]->user_timestamp;
         $current_timestamp = date("o-m-d H:i:s");
@@ -29,14 +32,12 @@ class MenuController extends Controller
 
         if($secs/60.0 < 30){
             $menu = Menu::all();
-
-            return response()->json(['data'=>$menu]);
+            return response()->json(['status'=>true,'message'=>'menu results','data'=>$menu]);
         }
         else
         {
-            $menu = "Ljubica";
 
-            return response()->json(['data'=>$menu]);
+            return response()->json(['status'=>false,'message'=>'no data','data'=>array()]);
         }
     }
 }
