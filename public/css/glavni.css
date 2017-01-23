@@ -34,6 +34,10 @@
     display: none;
     background-image: url("../../public/images/coffee.jpg");
 }
+.order_table{
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
 .login-elements{
     padding-bottom: 10px;
 }
